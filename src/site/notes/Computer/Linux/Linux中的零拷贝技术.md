@@ -2,7 +2,7 @@
 {"dg-publish":true,"permalink":"/Computer/Linux/Linux中的零拷贝技术/"}
 ---
 
-### 1. 传统数据拷贝发送
+#### 1. 传统数据拷贝发送
 
 ![20250420105125.png](/img/user/Resource/%E9%99%84%E4%BB%B6/20250420105125.png)
 一共出现了**四次**数据拷贝
