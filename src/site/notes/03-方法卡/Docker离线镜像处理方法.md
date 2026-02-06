@@ -1,9 +1,7 @@
 ---
-{"dg-publish":true,"permalink":"/03-方法卡/Docker离线镜像处理方法/","tags":["docker","离线部署","镜像管理","内网环境","方法卡"]}
+{"dg-publish":true,"permalink":"/03-方法卡/Docker离线镜像处理方法/","tags":["docker","离线部署","镜像管理","内网环境","方法卡","type/practice"]}
 ---
 
-
-#type/practice #docker 
 ## 1. 场景
 内网环境无法直接 pull 镜像，通过 save/load 实现离线传输。
 
