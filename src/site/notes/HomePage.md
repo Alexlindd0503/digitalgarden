@@ -35,7 +35,7 @@
 ### 🏗️ 架构师学习路径
 | 学习路径                                               | 更新时间                         |
 | -------------------------------------------------- | ---------------------------- |
-| [[MOC-知识地图/MySQL数据库技术体系MOC\|MySQL数据库技术体系MOC]]   | 2:20 PM - February 06, 2026  |
+| [[MOC-知识地图/MySQL数据库技术体系MOC\|MySQL数据库技术体系MOC]]   | 2:26 PM - February 06, 2026  |
 | [[MOC-知识地图/Docker容器化技术体系MOC\|Docker容器化技术体系MOC]] | 10:53 AM - February 06, 2026 |
 
 { .block-language-dataview}
@@ -64,11 +64,11 @@
 
 | 标签           | 使用次数 |
 | ------------ | ---- |
-| #tech        | 13   |
+| #tech        | 14   |
 | #概念卡         | 11   |
 | #方法卡         | 8    |
-| #mysql       | 7    |
-| #tech/mysql  | 7    |
+| #tech/mysql  | 8    |
+| #mysql       | 6    |
 | #tech/docker | 6    |
 | #docker      | 4    |
 | #高可用         | 3    |
