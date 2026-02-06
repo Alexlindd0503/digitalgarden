@@ -2,7 +2,6 @@
 {"dg-publish":true,"permalink":"/HomePage/","tags":["gardenEntry"]}
 ---
 
-# 🏠 Java架构师知识库 HomePage
 
 > *"知识不是力量，运用知识才是力量"* - 培根
 
