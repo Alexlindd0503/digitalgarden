@@ -10,7 +10,7 @@
 ## 2. 操作流程
 
 ### 2.1. 导出镜像
-```bash
+```shell
 # 联网环境导出
 docker save java:8 -o java.tar
 # 压缩
@@ -20,7 +20,7 @@ gzip java.tar
 ```
 
 ### 2.2. 导入镜像  
-```bash
+```shell
 # 内网环境导入
 tar xzvf java.tar.gz
 
