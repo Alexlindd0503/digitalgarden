@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/03-方法卡/Docker工作目录迁移方法/","tags":["docker","存储管理","系统运维","磁盘迁移","方法卡","type/practice"]}
+{"dg-publish":true,"permalink":"/03-方法卡/Docker工作目录迁移方法/","tags":["存储管理","系统运维","磁盘迁移","方法卡","tech/docker"]}
 ---
 
 ## 1. 场景

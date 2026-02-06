@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/03-方法卡/Docker离线镜像处理方法/","tags":["docker","离线部署","镜像管理","内网环境","方法卡","type/practice"]}
+{"dg-publish":true,"permalink":"/03-方法卡/Docker离线镜像处理方法/","tags":["离线部署","镜像管理","内网环境","方法卡","tech/docker"]}
 ---
 
 ## 1. 场景
