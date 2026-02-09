@@ -23,7 +23,7 @@ gzip java.tar
 tar xzvf java.tar.gz
 
 # 另外解压
-unzip java.tar.gz
+gzip -d java.tar.gz
 
 #导入镜像
 docker load -i java.tar

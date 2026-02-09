@@ -465,10 +465,9 @@ MGR 架构（3 节点）:
 - [[01-概念卡/数据库/MySQL主从复制架构\|MySQL主从复制架构]] - 复制原理
 - [[03-方法卡/数据库/MySQL备份恢复方案\|MySQL备份恢复方案]] - 数据安全
 - [[03-方法卡/数据库/MySQL灾难恢复演练\|MySQL灾难恢复演练]] - 容灾演练
-- [[分布式系统设计\|分布式系统设计]] - 架构设计
+
 
 ## 13. 参考资源
 - [MySQL 高可用官方文档](https://dev.mysql.com/doc/refman/8.0/en/ha-overview.html)
 - [MHA 官方文档](https://github.com/yoshinorim/mha4mysql-manager)
 
-#mysql #高可用 #架构设计 #容灾
