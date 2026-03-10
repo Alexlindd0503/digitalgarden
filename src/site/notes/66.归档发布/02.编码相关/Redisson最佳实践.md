@@ -2,6 +2,7 @@
 {"dg-publish":true,"permalink":"/66.归档发布/02.编码相关/Redisson最佳实践/"}
 ---
 
+
 #java #最佳实践 #redis
 ```java
 // 1. Key 应该具有业务意义，避免全局竞争
@@ -41,4 +42,5 @@ try {
 }
 
 ```
+
 IsHeldByCurrentThread 这个需要判断，否则会出现解锁解的不是当前线程的
