@@ -4,18 +4,12 @@
 
 
 #最佳实践 #面试 
-## 1. Cache Line 是什么？
-
-![CPU cache](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/CPU_cache.png)
-
-CPU 读内存不是一个字节一个字节读的，而是按**缓存行（Cache Line）**为单位批量加载。Cache Line 是 CPU 缓存可操作的最小单位，大小通常是 **64 字节**（主流 64 位架构）。
+![cache](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/cache.png)
+## 1. Cache Line 是什么？CPU 读内存不是一个字节一个字节读的，而是按**缓存行（Cache Line）**为单位批量加载。Cache Line 是 CPU 缓存可操作的最小单位，大小通常是 **64 字节**（主流 64 位架构）。
 
 Java 里一个 `long` 是 8 字节，所以一个 Cache Line 能装下 8 个 `long`。
 
-CPU 加载数据时，会把目标数据**连同相邻的数据一起**读进 Cache Line，因为相邻数据被访问的概率很高，这样能减少 CPU 频繁去内存取数据的次数。
-
-![CPU cache命中](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/CPU_cache命中.png)
-
+CPU 加载数据时，会把目标数据**连同相邻的数据一起**读进 Cache Line，因为相邻数据被访问的概率很高，这样能减少 CPU 频繁去内存取数据的次数。![cache mark](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/cache_mark.png)
 ## 2. 什么是伪共享？
 
 假设变量 A、B、C、D 在内存里紧挨着，被加载到了同一个 Cache Line。
