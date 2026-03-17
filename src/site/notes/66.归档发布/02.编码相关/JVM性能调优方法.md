@@ -200,3 +200,11 @@ OOM 必备启动参数：
 - Full GC 每天就那么几次
 - 响应时间正常，业务没投诉
 
+
+## 相关链接
+
+- [[01.专项学习/JavaVirtualMachine/1.JVM基础\|JVM基础]]
+- [[01.专项学习/JavaVirtualMachine/3.垃圾回收\|垃圾回收]]
+- [[01.专项学习/JavaVirtualMachine/5.ZGC学习\|ZGC学习]]
+- [[66.归档发布/02.编码相关/JAVA的堆外内存\|JAVA的堆外内存]]
+- [[66.归档发布/02.编码相关/Java虚引用\|Java虚引用]]

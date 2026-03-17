@@ -60,7 +60,7 @@ unsafe.freeMemory(address);
 
 当 `DirectByteBuffer` 对象被 GC 回收时，`Cleaner` 感知到后会自动调用 `unsafe.freeMemory()` 释放对应的堆外内存。`Cleaner` 底层就是虚引用 + `ReferenceQueue` 机制，详见 [[66.归档发布/02.编码相关/Java虚引用\|Java虚引用]]。
 
-![堆外内存示意.png](/img/user/attachment/%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98%E7%A4%BA%E6%84%8F.png)
+![堆外内存示意](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/堆外内存示意.png)
 
 问题在于：`DirectByteBuffer` 对象如果活得比较久，会晋升到老年代，只有 Old GC 或 Full GC 才能触发回收。如果长时间没有 Full GC，堆外内存就一直占着不释放，最终把物理内存耗尽。
 
