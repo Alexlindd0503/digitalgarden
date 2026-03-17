@@ -15,7 +15,7 @@ Raft 是一种分布式共识算法，用来保证多个节点之间的数据一
 
 ## 2. Leader 选举
 
-Follower 在随机超时时间（150~300ms）内没收到 Leader 心跳，就转为 Candidate 发起选举：
+Follower 在随机超时时间（150~300 ms）内没收到 Leader 心跳，就转为 Candidate 发起选举：
 
 1. 自增 term（选举轮次），给自己投票
 2. 向其他节点发 RequestVote 请求
@@ -46,7 +46,7 @@ Leader 下次心跳通知 Follower 提交
 - C+D+E 这边超时后重新选举，C 成为新 Leader，term 更高，可以正常写入
 
 网络恢复后，A 和 B 发现 C 的 term 更高，回滚自己 uncommitted 的日志，从 C 同步数据，集群恢复一致。
-![网络分区.png|500](/img/user/attachment/%E7%BD%91%E7%BB%9C%E5%88%86%E5%8C%BA.png)
+![网络分区](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/网络分区.png)
 这也是 Redis 哨兵解决脑裂的底层逻辑，见 [[66.归档发布/03.缓存/Redis哨兵与集群\|Redis哨兵与集群]]。
 
 ## 5. Raft vs Gossip

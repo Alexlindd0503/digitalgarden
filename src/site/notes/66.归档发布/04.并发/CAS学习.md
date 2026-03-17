@@ -12,9 +12,9 @@ CAS 全称：Compare And Swap（比较并交换）
 
 Java 中的 `AtomicInteger` 就是用 CAS 实现的，多个线程同时执行 CAS 操作，只有一个能成功，这是硬件保证的。
 
-![CAS使用.png](/img/user/attachment/CAS%E4%BD%BF%E7%94%A8.png)
+![CAS使用](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/CAS使用.png)
 
-![CAS原理.png](/img/user/attachment/CAS%E5%8E%9F%E7%90%86.png)
+![CAS原理](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/CAS原理.png)
 
 ---
 

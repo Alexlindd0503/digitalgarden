@@ -27,7 +27,7 @@
 4. **有界队列满了**：触发拒绝策略 RejectedExectionHandler
 5. **无界队列**：内存会一直涨，最后可能 OOM
 
-![jdk线程池原理.png](/img/user/attachment/jdk%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8E%9F%E7%90%86.png)
+![jdk线程池原理|700](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/jdk线程池原理.png)
 
 ---
 
@@ -39,7 +39,7 @@ JDK 的线程池会**优先把任务扔队列**，而不是创建更多线程。
 
 因为 CPU 密集型任务（大量计算）会让 CPU 很忙，这时候线程数和 CPU 核数差不多就够了。线程太多反而会频繁切换上下文，降低效率。所以超过核心线程数后，线程池不会马上加线程，而是让任务在队列里等核心线程空闲。
 
-Tomcat 使用的线程池就不是 JDK 原生的线程池，而是做了一些改造，当线程数超过 coreThreadCount 之后会优先创建线程，直到线程数到达maxThreadCount，这样就比较适合于 Web 系统大量 IO 操作的场景了。
+Tomcat 使用的线程池就不是 JDK 原生的线程池，而是做了一些改造，当线程数超过 coreThreadCount 之后会优先创建线程，直到线程数到达 maxThreadCount，这样就比较适合于 Web 系统大量 IO 操作的场景了。
 ### 3.2 队列堆积要监控
 队列堆积量是个重要指标，特别是对实时性要求高的任务。堆积太多说明处理不过来了。
 

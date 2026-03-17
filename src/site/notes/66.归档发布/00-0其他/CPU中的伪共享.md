@@ -6,7 +6,7 @@
 #最佳实践 #面试 
 ## 1. Cache Line 是什么？
 
-![CPU cache.png](/img/user/attachment/CPU%20cache.png)
+![CPU cache](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/CPU_cache.png)
 
 CPU 读内存不是一个字节一个字节读的，而是按**缓存行（Cache Line）**为单位批量加载。Cache Line 是 CPU 缓存可操作的最小单位，大小通常是 **64 字节**（主流 64 位架构）。
 
@@ -14,7 +14,7 @@ Java 里一个 `long` 是 8 字节，所以一个 Cache Line 能装下 8 个 `lo
 
 CPU 加载数据时，会把目标数据**连同相邻的数据一起**读进 Cache Line，因为相邻数据被访问的概率很高，这样能减少 CPU 频繁去内存取数据的次数。
 
-![CPU cache命中.png](/img/user/attachment/CPU%20cache%E5%91%BD%E4%B8%AD.png)
+![CPU cache命中](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/CPU_cache命中.png)
 
 ## 2. 什么是伪共享？
 
@@ -40,7 +40,7 @@ A 和 C 根本不是同一个变量，线程之间也没有逻辑上的共享，
 
 ## 3. MESI 协议怎么保证缓存一致？
 
-多核 CPU 每个核都有自己的 L1/L2 缓存，MESI 协议用来保证各核缓存的一致性。
+多核 CPU 每个核都有自己的 L 1/L 2 缓存，MESI 协议用来保证各核缓存的一致性。
 
 每条 Cache Line 有四种状态：
 
