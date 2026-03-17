@@ -2,7 +2,8 @@
 {"dg-publish":true,"permalink":"/66.归档发布/06.数据库/JDBC连接参数优化方法/"}
 ---
 
-#数据库 #最佳实践 #mysql #java 
+#数据库 #最佳实践 #mysql #java
+
 ```ad-summary
 title: 结论
 JDBC 连接参数里最值得关注的就一个：`rewriteBatchedStatements=true`，批量插入性能能提升几十倍。其他参数基本是字符集、时区、超时的标准配置。

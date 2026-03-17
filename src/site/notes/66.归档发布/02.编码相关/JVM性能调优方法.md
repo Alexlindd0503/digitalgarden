@@ -4,6 +4,15 @@
 
 #java #最佳实践 #jvm
 
+```ad-summary
+title: 总结
+
+- 调优核心目标：减少 Full GC 频率，降低停顿时间，让对象尽量在新生代回收
+- 调优优先级：先改代码 → 合理分配内存 → 选对 GC 器 → 最后才微调参数
+- 现在基本 G1 起步，大内存上 ZGC；G1 不需要手动设 `-Xmn`
+- OOM 必备：`-XX:+HeapDumpOnOutOfMemoryError`，出了问题才有得查
+```
+
 ## 1. 先说结论
 
 JVM 调优的核心目标就一个：**减少 Full GC 频率，降低 GC 停顿时间**。

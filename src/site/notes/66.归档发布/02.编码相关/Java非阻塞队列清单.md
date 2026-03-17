@@ -4,6 +4,14 @@
 
 #java #并发 #最佳实践
 
+```ad-summary
+title: 总结
+
+- 非阻塞队列用 CAS 无锁实现，操作立即返回，不阻塞线程，性能比阻塞队列高
+- ConcurrentLinkedQueue 是高并发场景首选；ConcurrentLinkedDeque 支持双端，ForkJoinPool 工作窃取用它
+- 代价是需要自己处理 poll() 返回 null 的情况
+```
+
 非阻塞队列用 CAS 无锁  操作实现线程安全，操作立即返回，不会让线程进入等待状态。高并发低延迟场景比阻塞队列性能更好，代价是需要自己处理 `poll()` 返回 `null` 的情况。
 
 ## 1. ConcurrentLinkedQueue

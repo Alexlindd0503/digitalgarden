@@ -4,6 +4,15 @@
 
 #java #最佳实践
 
+```ad-summary
+title: 总结
+
+- 四个核心类：`Class`、`Field`、`Method`、`Constructor`
+- `getXxx()` 只拿 public 含继承，`getDeclaredXxx()` 拿全部含 private 不含继承
+- 高频调用要缓存 Method/Field 对象，反射比直接调用慢 10-100 倍
+- `setAccessible(true)` 跳过访问检查，框架/工具用，业务代码别乱用
+```
+
 反射 API 四个核心类：`Class`、`Field`、`Method`、`Constructor`。
 
 方法命名规律：

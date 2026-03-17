@@ -2,13 +2,20 @@
 {"dg-publish":true,"permalink":"/66.归档发布/02.编码相关/Java Stream API常用操作方法/"}
 ---
 
-#java 
+#java
+
+```ad-summary
+title: 总结
+
+- Stream 操作分两类：中间操作（惰性，返回 Stream）和终止操作（触发计算，返回结果）
+- 常用：filter 过滤、map 映射、groupingBy 分组、sorted 排序、distinct 去重
+- Stream 不能复用；数据量小时和 for 循环性能差不多，别过度优化
+```
 
 Stream 操作分两类：
 - **中间操作**（返回 Stream）：filter、map、sorted 等，惰性执行
 - **终止操作**（返回结果）：collect、count、reduce 等，触发实际计算
 
----
 ## 1. 过滤 filter
 ```java
 // 单条件

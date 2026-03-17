@@ -4,6 +4,14 @@
 
 #springboot #tomcat #undertow #性能调优
 
+```ad-summary
+title: 总结
+
+- Spring Boot 3 默认 Tomcat，高并发低内存可换 Undertow，Java 21+ 开虚拟线程更值得考虑
+- 线程数从保守值开始压测，不要套公式；IO 密集可多配，CPU 密集接近核心数就够
+- 任务结束务必 remove() ThreadLocal，线程池复用会导致数据污染
+```
+
 ## 1. 先选容器
 
 Spring Boot 3 内置三种 Web 容器，默认是 Tomcat，也可以换成 Undertow。

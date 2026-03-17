@@ -4,6 +4,15 @@
 
 #redis #集群 #高可用
 
+```ad-summary
+title: 总结
+
+- 小规模用主从 + 哨兵，数据量大或 QPS 高上 Cluster
+- 哨兵通过 Raft 投票选 Leader 执行故障转移，选新主库按优先级 → 复制进度 → 运行 ID 打分
+- 脑裂问题用 `min-slaves-to-write` + `min-slaves-max-lag` 限制主库写入条件
+- 主从复制断线重连优先走增量同步，backlog 追不上才全量
+```
+
 ## 1. 三种部署方式怎么选？
 
 | | 主从复制 | 哨兵模式 | Cluster |

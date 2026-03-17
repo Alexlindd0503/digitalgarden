@@ -4,6 +4,15 @@
 
 #分布式 #共识算法 #raft
 
+```ad-summary
+title: 总结
+
+- Raft 是强一致共识算法，Leader 处理所有写请求，超过半数节点确认才提交
+- 选举靠随机超时避免平票，每个 term 每个节点只投一票
+- 网络分区时少数派无法提交，分区恢复后回滚 uncommitted 日志从新 Leader 同步
+- 和 Gossip 的区别：Raft 强一致适合元数据，Gossip 最终一致适合状态广播
+```
+
 ## 1. Raft 是什么？
 
 Raft 是一种分布式共识算法，用来保证多个节点之间的数据一致性。比 Paxos 更容易理解和实现，etcd、TiKV、Consul 都在用它。

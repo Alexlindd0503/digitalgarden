@@ -3,7 +3,16 @@
 ---
 
 
-#最佳实践 #面试 
+#最佳实践 #面试
+
+```ad-summary
+title: 总结
+
+- CPU 按缓存行（64字节）批量加载数据，多线程修改同一缓存行的不同变量会触发 MESI 失效，造成伪共享
+- 解决办法：手动 Padding 填充、`@Contended` 注解、或直接用 `LongAdder`
+- 普通业务不用特别处理，高并发计数器、环形队列等场景才需要关注
+```
+
 ![cache](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/cache.png)
 ## 1. Cache Line 是什么？CPU 读内存不是一个字节一个字节读的，而是按**缓存行（Cache Line）**为单位批量加载。Cache Line 是 CPU 缓存可操作的最小单位，大小通常是 **64 字节**（主流 64 位架构）。
 

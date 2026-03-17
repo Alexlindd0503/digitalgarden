@@ -4,6 +4,14 @@
 
 #redis #缓存 #最佳实践
 
+```ad-summary
+title: 总结
+
+- 内存满了会按 `maxmemory-policy` 淘汰 key，默认 `noeviction` 直接报错，生产别用
+- 大部分场景用 `allkeys-lru`；有数据不能被淘汰时用 `volatile-lru`
+- `evicted_keys` 一直涨说明内存不够用，要么加内存要么排查 bigkey
+```
+
 ## 1. 内存淘汰是什么？
 
 Redis 内存达到 `maxmemory` 上限时，会根据 `maxmemory-policy` 决定怎么处理新的写入。没配好的话，轻则写入报错，重则把热点数据给淘汰掉。

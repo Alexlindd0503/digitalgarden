@@ -4,6 +4,15 @@
 
 #java #最佳实践
 
+```ad-summary
+title: 总结
+
+- 捕获特定异常，不生吞，至少记日志并保留异常链
+- 早抛出（入口快速失败）、晚捕获（有业务上下文的地方统一处理）
+- 业务异常用 unchecked（继承 RuntimeException），配合 `@ControllerAdvice` 全局处理
+- 记日志一定传异常对象 `log.error("msg", e)`，只记 `e.getMessage()` 会丢堆栈
+```
+
 ## 1. 先说结论
 
 几条核心原则：

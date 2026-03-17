@@ -4,6 +4,14 @@
 
 #java #并发 #aqs
 
+```ad-summary
+title: 总结
+
+- AQS 用一个 `state` 变量 + FIFO 等待队列实现同步，ReentrantLock/Semaphore/CountDownLatch 都基于它
+- 默认用非公平锁，吞吐量更高；需要顺序性才用公平锁
+- 没有特殊需求用 `synchronized`，需要超时/中断/公平性再上 ReentrantLock
+```
+
 ## 1. AQS 是什么？
 
 AQS（AbstractQueuedSynchronizer）是 Java 并发包的底层框架，ReentrantLock、Semaphore、CountDownLatch、CyclicBarrier、ReentrantReadWriteLock 都是基于它实现的。
@@ -80,4 +88,5 @@ rwLock.writeLock().lock();  // 写锁，独占
 ## 相关链接
 
 - [[66.归档发布/04.并发/死锁问题与解决方案\|死锁问题与解决方案]]
-- [[66.归档发布/02.编码相关/Java阻塞队列清单\|Java阻塞队列清单]]
+- [[02.并发工具类\|02.并发工具类]] — Lock/Semaphore/ReadWriteLock 等工具类使用
+- [[管程是解决并发问题的万能钥匙\|管程是解决并发问题的万能钥匙]] — AQS 背后的管程思想

@@ -2,7 +2,16 @@
 {"dg-publish":true,"permalink":"/66.归档发布/00.Linux/find&grep使用/"}
 ---
 
-#linux 
+#linux
+
+```ad-summary
+title: 总结
+
+- grep 搜文件内容，find 搜文件路径，两者组合用可以精准定位文件
+- grep 常用 `-i`（忽略大小写）、`-n`（行号）、`-r`（递归）
+- find 常用 `-name`、`-type`、`-mtime`、`-exec` 对结果执行命令
+```
+
 ## 1. grep - 文本内容搜索
 
 grep 用于在文件中搜索包含特定关键词的行。

@@ -4,6 +4,14 @@
 
 #docker #java #最佳实践
 
+```ad-summary
+title: 总结
+
+- 生产环境用多阶段构建，构建工具不进最终镜像；jar 已在 CI 构建好则用单阶段
+- 基础镜像选 `eclipse-temurin:21-jre-alpine`，运行 Spring Boot 只需 JRE
+- 容器内必须加 `-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0`，否则 JVM 不感知容器内存限制
+```
+
 ## 1. Java 应用标准 Dockerfile
 
 生产环境推荐用多阶段构建，构建工具不进最终镜像，体积小、安全：

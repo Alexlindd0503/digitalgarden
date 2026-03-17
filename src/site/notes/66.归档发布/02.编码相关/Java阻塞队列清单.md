@@ -4,6 +4,15 @@
 
 #java #并发 #最佳实践
 
+```ad-summary
+title: 总结
+
+- 阻塞队列在队列空/满时自动阻塞，是生产者-消费者模式的标配
+- LinkedBlockingQueue 读写分离锁，吞吐量高，线程池默认用它；注意要指定容量，默认无界容易 OOM
+- DelayQueue 做延迟任务，SynchronousQueue 做直接交接，LinkedTransferQueue 性能最高
+- 生产环境用带超时的方法（offer/poll），避免线程永久阻塞
+```
+
 阻塞队列在队列为空时 `take()` 会阻塞，队列满时 `put()` 会阻塞，是生产者-消费者模式的标配。
 
 ## 1. 六种实现
