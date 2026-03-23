@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/06.数据库/JDBC连接参数优化方法/"}
+{"dg-publish":true,"permalink":"/66.归档发布/06.数据库/JDBC连接参数优化方法/","dg-note-properties":{"时间":"2026-03-14"}}
 ---
 
 #数据库 #最佳实践 #mysql #java

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/04.并发/分布式/Raft协议原理/"}
+{"dg-publish":true,"permalink":"/66.归档发布/04.并发/分布式/Raft协议原理/","dg-note-properties":{"时间":"2026-03-15"}}
 ---
 
 #分布式 #共识算法 #raft
@@ -56,7 +56,7 @@ Leader 下次心跳通知 Follower 提交
 
 网络恢复后，A 和 B 发现 C 的 term 更高，回滚自己 uncommitted 的日志，从 C 同步数据，集群恢复一致。
 ![网络分区](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/网络分区.png)
-这也是 Redis 哨兵解决脑裂的底层逻辑，见 [[66.归档发布/03.缓存/Redis哨兵与集群\|Redis哨兵与集群]]。
+这也是 Redis 哨兵解决脑裂的底层逻辑，见 [[Redis哨兵与集群\|Redis哨兵与集群]]。
 
 ## 5. Raft vs Gossip
 
@@ -71,5 +71,5 @@ Redis Cluster 节点间状态传播用的是 Gossip，哨兵选主用的是类 R
 
 ## 相关链接
 
-- [[66.归档发布/03.缓存/Redis哨兵与集群\|Redis哨兵与集群]]
+- [[Redis哨兵与集群\|Redis哨兵与集群]]
 - [[66.归档发布/04.并发/分布式/分布式系统常见陷阱清单\|分布式系统常见陷阱清单]]

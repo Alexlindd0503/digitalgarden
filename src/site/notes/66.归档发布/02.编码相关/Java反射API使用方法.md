@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/02.编码相关/Java反射API使用方法/"}
+{"dg-publish":true,"permalink":"/66.归档发布/02.编码相关/Java反射API使用方法/","dg-note-properties":{"时间":"2026-03-14"}}
 ---
 
 #java #最佳实践

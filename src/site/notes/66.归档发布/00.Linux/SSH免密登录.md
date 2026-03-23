@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/00.Linux/SSH免密登录/"}
+{"dg-publish":true,"permalink":"/66.归档发布/00.Linux/SSH免密登录/","dg-note-properties":{}}
 ---
 
 #linux

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/00-0其他/nginx location与proxy_pass斜杠规则/"}
+{"dg-publish":true,"permalink":"/66.归档发布/00-0其他/nginx location与proxy_pass斜杠规则/","dg-note-properties":{}}
 ---
 
 #nginx #最佳实践

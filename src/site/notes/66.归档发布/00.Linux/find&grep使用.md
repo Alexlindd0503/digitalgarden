@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/00.Linux/find&grep使用/"}
+{"dg-publish":true,"permalink":"/66.归档发布/00.Linux/find&grep使用/","dg-note-properties":{}}
 ---
 
 #linux

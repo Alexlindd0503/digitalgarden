@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/00.Linux/Vim使用/"}
+{"dg-publish":true,"permalink":"/66.归档发布/00.Linux/Vim使用/","dg-note-properties":{"时间":"2026-03-16"}}
 ---
 
 #linux

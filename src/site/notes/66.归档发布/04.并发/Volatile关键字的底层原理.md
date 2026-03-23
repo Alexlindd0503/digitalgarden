@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/04.并发/Volatile关键字的底层原理/"}
+{"dg-publish":true,"permalink":"/66.归档发布/04.并发/Volatile关键字的底层原理/","dg-note-properties":{"时间":"2026-03-17"}}
 ---
 
 #java #并发 #原理

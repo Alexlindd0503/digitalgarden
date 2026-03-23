@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/06.数据库/MySQL开发规范清单/"}
+{"dg-publish":true,"permalink":"/66.归档发布/06.数据库/MySQL开发规范清单/","dg-note-properties":{"时间":"2026-03-14"}}
 ---
 
 #数据库 #mysql #最佳实践

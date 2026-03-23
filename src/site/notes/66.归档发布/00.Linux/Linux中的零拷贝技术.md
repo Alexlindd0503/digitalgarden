@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/00.Linux/Linux中的零拷贝技术/"}
+{"dg-publish":true,"permalink":"/66.归档发布/00.Linux/Linux中的零拷贝技术/","dg-note-properties":{"时间":"2026-03-15"}}
 ---
 
 #linux #零拷贝 #io #性能
@@ -47,6 +47,72 @@ Linux 2.4 之后，配合支持 Scatter/Gather 的网卡，`sendfile` 可以进�
 ![最终领拷贝](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/最终领拷贝.png)
 
 只剩 2 次 DMA 拷贝，CPU 全程不参与数据搬运，这才是真正意义上的"零拷贝"（零 CPU 拷贝）。
+
+```java title:示例代码
+package com.dd.other;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+
+/**
+ * @author lindd
+ * @version 1.0
+ * @description 零拷贝
+ * @date 2025/9/22 16:34:16
+ */
+public class ZeroCopy {
+    public static void main(String[] args) throws Exception {
+        File input = new File("D:\\360Downloads\\XMind2023-v23.11.3771-Green.rar");
+        File tcOutput = new File("D:\\360Downloads\\XMind2023-v23.11.3771-Green2.rar");
+        File zcOutput = new File("D:\\360Downloads\\XMind2023-v23.11.3771-Green3.rar");
+
+        // 分别测试传统拷贝和零拷贝
+        traditionalCopy(input, tcOutput);
+        zeroCopy(input, zcOutput);
+    }
+
+    public static void traditionalCopy(File input, File output) throws Exception {
+        long start = System.currentTimeMillis();
+        // 使用 try-with-resources 确保资源正确关闭
+        //  try (RandomAccessFile rafRead = new RandomAccessFile(input, "r");
+        //        RandomAccessFile rafWrite = new RandomAccessFile(output, "rw")) {
+        try (FileInputStream rafRead = new FileInputStream(input);
+             FileOutputStream rafWrite = new FileOutputStream(output)) {
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = rafRead.read(buf)) != -1) {
+                rafWrite.write(buf, 0, len);
+            }
+        } // try-with-resources 会自动关闭 rafRead 和 rafWrite
+        long end = System.currentTimeMillis();
+        System.out.println("traditionalCopy 用时为: " + (end - start) + "ms");
+    }
+
+    public static void zeroCopy(File input, File output) throws Exception {
+        long start = System.currentTimeMillis();
+        // 使用 try-with-resources 确保资源正确关闭
+        try (FileInputStream fis = new FileInputStream(input);
+             FileOutputStream fos = new FileOutputStream(output)) {
+            FileChannel srcChannel = fis.getChannel();
+            FileChannel destChannel = fos.getChannel();
+            // 使用 transferTo 实现零拷贝
+            long size = srcChannel.size();
+            long transferred = 0;
+
+            while (transferred < size) {
+                transferred += srcChannel.transferTo(transferred, size - transferred, destChannel);
+            }
+            //srcChannel.transferTo(0, input.length(), destChannel);
+        } // try-with-resources 会自动关闭 fis 和 fos
+        long end = System.currentTimeMillis();
+        System.out.println("ZeroCopy 用时为: " + (end - start) + "ms");
+    }
+}
+
+```
 
 ## 4. mmap
 

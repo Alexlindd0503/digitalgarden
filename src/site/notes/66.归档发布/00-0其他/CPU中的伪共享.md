@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/00-0其他/CPU中的伪共享/"}
+{"dg-publish":true,"permalink":"/66.归档发布/00-0其他/CPU中的伪共享/","dg-note-properties":{}}
 ---
 
 

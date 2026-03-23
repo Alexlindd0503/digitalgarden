@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/04.并发/线程池ThreadPoolExecutor/"}
+{"dg-publish":true,"permalink":"/66.归档发布/04.并发/线程池ThreadPoolExecutor/","dg-note-properties":{"cssclasses":["p-indent"]}}
 ---
 
 #面试 #java

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/01.docker/迁移var-lib-docker目录/"}
+{"dg-publish":true,"permalink":"/66.归档发布/01.docker/迁移var-lib-docker目录/","dg-note-properties":{}}
 ---
 
 #docker

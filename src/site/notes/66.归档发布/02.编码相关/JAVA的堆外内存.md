@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/02.编码相关/JAVA的堆外内存/"}
+{"dg-publish":true,"permalink":"/66.归档发布/02.编码相关/JAVA的堆外内存/","dg-note-properties":{"时间":"2026-03-15"}}
 ---
 
 #java #jvm #内存 #nio

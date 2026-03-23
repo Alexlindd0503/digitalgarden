@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/04.并发/CAS学习/"}
+{"dg-publish":true,"permalink":"/66.归档发布/04.并发/CAS学习/","dg-note-properties":{}}
 ---
 
 #锁 #面试 #java #并发

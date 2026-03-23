@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/02.编码相关/Error与Exception的区别/"}
+{"dg-publish":true,"permalink":"/66.归档发布/02.编码相关/Error与Exception的区别/","dg-note-properties":{"时间":"2026-03-21"}}
 ---
 
 #java #最佳实践 #面试

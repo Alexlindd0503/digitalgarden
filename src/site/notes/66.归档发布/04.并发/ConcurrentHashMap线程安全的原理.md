@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/04.并发/ConcurrentHashMap线程安全的原理/"}
+{"dg-publish":true,"permalink":"/66.归档发布/04.并发/ConcurrentHashMap线程安全的原理/","dg-note-properties":{"时间":"2026-03-21"}}
 ---
 
 #面试 #锁 #并发 #最佳实践

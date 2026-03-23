@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/00-0其他/SpringBoot3 Web容器配置指南/"}
+{"dg-publish":true,"permalink":"/66.归档发布/00-0其他/SpringBoot3 Web容器配置指南/","dg-note-properties":{"时间":"2026-03-15"}}
 ---
 
 #springboot #tomcat #undertow #性能调优

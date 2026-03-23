@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/04.并发/Future模式与Promise模式/"}
+{"dg-publish":true,"permalink":"/66.归档发布/04.并发/Future模式与Promise模式/","dg-note-properties":{}}
 ---
 
 #并发

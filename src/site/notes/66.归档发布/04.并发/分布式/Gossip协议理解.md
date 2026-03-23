@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/04.并发/分布式/Gossip协议理解/"}
+{"dg-publish":true,"permalink":"/66.归档发布/04.并发/分布式/Gossip协议理解/","dg-note-properties":{"时间":"2026-03-15"}}
 ---
 
 #分布式 #协议 #gossip
@@ -57,10 +57,10 @@ Redis Cluster 节点间通过 Gossip 协议传播：
 
 每个节点定期随机选几个节点发送 PING 消息，携带自己知道的部分节点状态，对方回 PONG 时也带上自己的状态，这样信息就在集群里扩散开了。
 
-详见 [[66.归档发布/03.缓存/Redis Cluster槽管理机制\|Redis Cluster槽管理机制]]。
+详见 [[Redis Cluster槽管理机制\|Redis Cluster槽管理机制]]。
 
 ## 相关链接
 
-- [[66.归档发布/03.缓存/Redis Cluster槽管理机制\|Redis Cluster槽管理机制]]
-- [[66.归档发布/03.缓存/Redis哨兵与集群\|Redis哨兵与集群]]
+- [[Redis Cluster槽管理机制\|Redis Cluster槽管理机制]]
+- [[Redis哨兵与集群\|Redis哨兵与集群]]
 - [[66.归档发布/04.并发/分布式/Raft协议原理\|Raft协议原理]]

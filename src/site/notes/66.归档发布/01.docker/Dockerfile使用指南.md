@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/66.归档发布/01.docker/Dockerfile使用指南/"}
+{"dg-publish":true,"permalink":"/66.归档发布/01.docker/Dockerfile使用指南/","dg-note-properties":{"时间":"2026-03-14"}}
 ---
 
 #docker #java #最佳实践
