@@ -14,7 +14,8 @@ title: 总结
 ```
 
 ![cache](https://raw.githubusercontent.com/Alexlindd0503/obsidian-img/main/cache.png)
-## 1. Cache Line 是什么？CPU 读内存不是一个字节一个字节读的，而是按**缓存行（Cache Line）**为单位批量加载。Cache Line 是 CPU 缓存可操作的最小单位，大小通常是 **64 字节**（主流 64 位架构）。
+## 1. Cache Line 是什么？
+CPU 读内存不是一个字节一个字节读的，而是按**缓存行（Cache Line）**为单位批量加载。Cache Line 是 CPU 缓存可操作的最小单位，大小通常是 **64 字节**（主流 64 位架构）。
 
 Java 里一个 `long` 是 8 字节，所以一个 Cache Line 能装下 8 个 `long`。
 
