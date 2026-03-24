@@ -159,4 +159,4 @@ ps.setString(1, userName);
 String sql = "SELECT * FROM user WHERE name = '" + userName + "'";
 ```
 ## 相关链接
-- [[66.归档发布/06.数据库/JDBC连接参数优化方法\|JDBC连接参数优化方法]]
+- [[66.归档发布/06.数据库/MySQL的JDBC与连接池调优\|MySQL的JDBC与连接池调优]]
