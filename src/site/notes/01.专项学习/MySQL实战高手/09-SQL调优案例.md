@@ -1,8 +1,8 @@
 ---
-{"dg-publish":true,"permalink":"/01.专项学习/MySQL实战高手/09-SQL调优案例/","dg-note-properties":{"时间":"2026-03-22"}}
+{"dg-publish":true,"permalink":"/01.专项学习/MySQL实战高手/09-SQL调优案例/","dg-note-properties":{"时间":"2026-03-22","sr-due":"2026-03-29","sr-interval":3,"sr-ease":250}}
 ---
 
-#mysql #数据库 #调优 #案例
+#mysql #数据库 #调优 #案例 #review 
 
 ```ad-summary
 title: 总结
@@ -15,7 +15,7 @@ title: 总结
 
 ## 1. 千万级用户：semi join 坑
 
-**场景**：运营系统查最近没登录的用户
+**场景**：查最近没登录的用户
 
 ```sql
 SELECT id, name 
@@ -23,36 +23,39 @@ FROM users
 WHERE id IN (SELECT user_id FROM users_extent_info WHERE latest_login_time < xxxxx);
 ```
 
-**问题**：看执行计划，`users_extent_info` 走了 `idx_login_time` 索引，查出 4561 条，物化为临时表。但 `users` 表是全表扫描 + `Using join buffer`。
+**怎么发现走了 semi join**：
 
-![](https://cdn.nlark.com/yuque/0/2023/png/1678748/1695902926623-8f7e3ce5-7444-4c56-8de6-2d6d25040e7d.png)
+```sql
+EXPLAIN SELECT id, name 
+FROM users 
+WHERE id IN (SELECT user_id FROM users_extent_info WHERE latest_login_time < xxxxx);
 
-用 `SHOW WARNINGS` 可以看到 MySQL 把这个子查询转成了 **semi join**。
+-- 看完执行计划后，再执行：
+SHOW WARNINGS;
+```
 
-semi join 的逻辑：对 users 表每一行，去物化表里找有没有匹配的，有就返回。但 users 是全表扫描，几千万行都要过一遍，太慢了。
+看执行计划：
+- `Extra` 列出现 `Start temporary`、`End temporary` → 说明用了临时表做 semi join
+- `type` 列是 `ALL`（全表扫描）+ `Using join buffer` → 坏信号
 
-**解决**：关闭 semi join 优化
+`SHOW WARNINGS` 会显示 MySQL 实际执行的 SQL，能看到 `semi join` 关键字。
+
+**发生了什么**：
+- MySQL 把子查询改成了 semi join
+- 逻辑：拿 users 表每一行，去临时表里找有没有匹配的
+- 问题：users 几千万行，**全都要过一遍**，太慢
+
+**解决**：关掉 semi join
 
 ```sql
 SET optimizer_switch='semijoin=off';
 ```
 
-关掉后执行计划变成标准的子查询：先 range 查出 4561 条，再用主键索引 id 去 users 表匹配，**性能提升 10 倍**。
+关掉后，MySQL 老老实实用子查询：先查出 4561 条 id，再用主键去 users 表匹配，**快了 10 倍**。
 
-**变体写法**（效果一样）：
+## 2. 亿级商品：有索引却不用
 
-```sql
-SELECT COUNT(id)
-FROM users 
-WHERE id IN (SELECT user_id FROM users_extent_info WHERE latest_login_time < xxxxx)
-   OR id IN (SELECT user_id FROM users_extent_info WHERE latest_login_time < -1);
-```
-
-多加一个永假的 OR 条件，让优化器走子查询而不是 semi join。
-
-## 2. 亿级商品：索引不生效
-
-**场景**：按分类查商品，分页
+**场景**：按分类查商品
 
 ```sql
 SELECT * 
@@ -62,30 +65,20 @@ ORDER BY id DESC
 LIMIT 0, 10;
 ```
 
-**索引**：存在 `(category, sub_category)` 联合索引
+**有索引** `(category, sub_category)`，但 EXPLAIN 显示走的是主键全表扫描。
 
-**问题**：`EXPLAIN` 看到 `possible_keys` 里有索引，但实际 `key` 走的是 PRIMARY，`Extra` 里是 `Using where`（全表扫描）。索引没生效！
+**为什么**：优化器算了一笔账
+- 索引查出几万条 → 还要排序 → 成本高
+- 主键扫 → 扫到 10 条就返回 → 可能更快
+- 优化器选了它认为"更划算"的方式，但实际不是
 
-**原因**：虽然有索引，但 MySQL 优化器认为：
-- category + sub_category 过滤后可能还有几万条数据
-- 还要 `ORDER BY id` 排序
-- 用索引查完几万条再排序，不如直接走主键扫，扫到 10 条就返回
+**解决**：
+1. 强制用索引：`FORCE INDEX (idx_category)`
+2. 更好的方案：建联合索引 `(category, sub_category, id)`，WHERE 和 ORDER BY 都能用
 
-**解决**：强制使用索引
+## 3. 评论系统：深分页太慢
 
-```sql
-SELECT * 
-FROM products FORCE INDEX (idx_category)
-WHERE category='电子产品' AND sub_category='手机' 
-ORDER BY id DESC 
-LIMIT 0, 10;
-```
-
-**更好的方案**：建联合索引 `(category, sub_category, id)`，这样 WHERE 过滤和 ORDER BY 都能用上索引，避免排序。
-
-## 3. 评论系统：深分页优化
-
-**场景**：查某个商品的好评，翻到第 5000 页
+**场景**：翻到第 5000 页
 
 ```sql
 SELECT * 
@@ -95,16 +88,25 @@ ORDER BY id DESC
 LIMIT 100000, 20;
 ```
 
-**索引**：只有 `(product_id)`
+**慢在哪**：`SELECT *` 要所有字段，索引里没有，必须回表取完整行。10 万条回表只是为了跳过它们，真正要的只有 20 条。
 
-**问题**：
-1. 走 `product_id` 索引找到所有该商品的记录
-2. 每条都要**回表**拿 `is_good_comment` 字段判断是不是好评
-3. 还要排序、跳过 100000 条、取 20 条
+**为什么子查询能避免回表**：
 
-深分页时，前面 100000 条的回表全是浪费，只是为了跳过它们。
+索引的叶子节点长这样：
 
-**优化**：先用子查询查 ID，再回表
+```
+(product_id, is_good_comment) 索引
+├── xxx, 1 → 主键id=1001
+├── xxx, 1 → 主键id=1000
+└── xxx, 0 → 主键id=999
+```
+
+- `SELECT *`：要所有字段，索引里只有 id，必须去主键拿完整行（回表）
+- `SELECT id`：只要主键，**主键就在索引叶子节点上，不用回表**
+
+所以子查询 `SELECT id FROM comments ...` 走索引时，扫的是纯索引，不碰主键。
+
+**优化**：
 
 ```sql
 SELECT * 
@@ -119,51 +121,38 @@ FROM comments a,
 WHERE a.id = b.id;
 ```
 
-**原理**：
-1. 子查询只查 `id` 字段，如果 `id` 是主键或者索引覆盖了，就**不需要回表**
-2. 子查询跳过 100000 条（纯索引操作，很快）
-3. 只对最终的 20 条 id 做回表
+**效果**：子查询扫 10 万条索引（不回表）→ 只对最终 20 条 id 回表取完整数据。回表从 10 万次降到 20 次。
 
-回表次数从 10 万+ 降到 20 次，性能天差地别。
+**更优方案**：记住上一页最后一条 id，用 `WHERE id < last_id` 替代 LIMIT，彻底避免深分页。
 
-**进阶方案**：如果知道上一页的最后一条 id，可以用 `WHERE id < last_id` 替代 `LIMIT offset`，彻底避免深分页。
+## 4. 调优套路
 
-```sql
-SELECT * 
-FROM comments 
-WHERE product_id = 'xxx' AND is_good_comment = '1' AND id < 100020
-ORDER BY id DESC 
-LIMIT 20;
-```
-
-## 4. 调优套路总结
-
-遇到慢 SQL，按这个流程走：
+遇到慢 SQL，按这个顺序查：
 
 ```mermaid
 graph LR
-    A["EXPLAIN 分析"] --> B["看 type"]
-    B --> B1["ALL? 索引失效"]
-    B --> B2["range/ref? 还行"]
+    A["EXPLAIN"] --> B["看 type"]
+    B --> B1["ALL → 索引失效"]
+    B --> B2["range/ref → 还行"]
     
     A --> C["看 key"]
-    C --> C1["NULL? 没走索引"]
-    C --> C2["走了但慢? 索引不够"]
+    C --> C1["NULL → 没走索引"]
+    C --> C2["走了但慢 → 索引不够"]
     
     A --> D["看 Extra"]
-    D --> D1["filesort? 排序没用索引"]
-    D --> D2["Using where? 回表太多"]
+    D --> D1["filesort → 排序没用索引"]
+    D --> D2["Using where → 回表太多"]
     
-    B1 --> E["建索引/改写 SQL"]
+    B1 --> E["建索引/改写SQL"]
     C1 --> E
     C2 --> E
     D1 --> E
     D2 --> E
 ```
 
-常见优化手段：
-- 索引没建对 → 补索引或调整字段顺序（参考 [[7.索引设计与生产经验\|7.索引设计与生产经验]]）
-- 索引失效 → 检查函数、隐式转换、左模糊等（参考 [[7.索引设计与生产经验#5\|7.索引设计与生产经验#5]]）
+常见手段：
+- 索引没建对 → 补索引（参考 [[01.专项学习/MySQL实战高手/07-索引设计与调优\|07-索引设计与调优]]）
+- 索引失效 → 检查函数、隐式转换（参考 [[01.专项学习/MySQL实战高手/07-索引设计与调优#5. 常见索引失效场景\|07-索引设计与调优#5. 常见索引失效场景]]）
 - 深分页 → 子查询先查 ID 再回表
-- 排序没用索引 → 把排序字段加入联合索引
+- 排序慢 → 排序字段加入联合索引
 - 优化器选错 → `FORCE INDEX` 或关闭某些优化
