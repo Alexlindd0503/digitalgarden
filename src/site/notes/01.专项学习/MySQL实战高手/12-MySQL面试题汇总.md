@@ -1,8 +1,8 @@
 ---
-{"dg-publish":true,"permalink":"/01.专项学习/MySQL实战高手/12-MySQL面试题汇总/","dg-note-properties":{"时间":"2026-03-22"}}
+{"dg-publish":true,"permalink":"/01.专项学习/MySQL实战高手/12-MySQL面试题汇总/","dg-note-properties":{"时间":"2026-03-22","sr-due":"2026-03-29","sr-interval":3,"sr-ease":250}}
 ---
 
-#mysql #数据库 #面试
+#mysql #数据库 #面试 #review 
 
 ```ad-summary
 title: 总结
